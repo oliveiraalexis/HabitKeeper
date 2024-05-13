@@ -10,8 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-native-vector-icons": "latest",
     "react": "18.2.0",
-    "react-native": "0.74.1"
+    "react-native": "0.74.1",
+    "react-native-vector-icons": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.24.5",
