@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { Button } from '../Button/Button'
 
-export function Header(): React.JSX.Element {
+export function Header({title}: { title: string; }): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Icon name="settings-sharp" color="#ffffff" size={20}/>
-      <Text>Hábitos</Text>
-      <Icon name="add" color="#ffffff" size={20}/>
+      <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}}/>
+      <Text style={styles.text}>{title}</Text>
+      <Button icon={{name:"add", color:"#ffffff", size:20}}/>
     </View>
   )
 }
@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20
+    alignItems: 'center',
+    padding: 10
+  },
+  text: {
+    fontWeight: '900',
+    fontSize: 18,
+    color: '#ffffff'
   }
 })
