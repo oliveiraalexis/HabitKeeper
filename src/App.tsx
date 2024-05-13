@@ -1,35 +1,22 @@
 import React from 'react'
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native'
+import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { Header } from './components/Header/Header'
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
-        <Header/>
-        <Text>Hello World!</Text>
+        <Header title='Hábitos'/>
       </View>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  container: {
+    backgroundColor: '#161927',
+    flex: 1
+  }
 })
 
 export default App;
