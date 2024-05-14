@@ -8,7 +8,7 @@ export function Header({title}: { title: string; }): React.JSX.Element {
     <View style={styles.container}>
       <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}}/>
       <Text style={styles.text}>{title}</Text>
-      <Button icon={{name:"add", color:"#ffffff", size:20}}/>
+      <Button icon={{name:"add", color:"#ffffff", size:25}}/>
     </View>
   )
 }
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10
+    paddingBottom: 20
   },
   text: {
     fontWeight: '900',
