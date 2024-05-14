@@ -11,7 +11,8 @@ const weekday = [
   'SÁB'
 ]
 
-function getLast4Days(currentDay: Date = new Date()) {
+function getLast4Days() {
+  const currentDay = new Date()
   return [
     currentDay.getTime(),
     currentDay.setDate(currentDay.getDate() - 1),
