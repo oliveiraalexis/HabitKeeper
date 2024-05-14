@@ -14,16 +14,17 @@ const weekday = [
 function getLast4Days() {
   const currentDay = new Date()
   return [
-    currentDay.getTime(),
-    currentDay.setDate(currentDay.getDate() - 1),
-    currentDay.setDate(currentDay.getDate() - 1),
-    currentDay.setDate(currentDay.getDate() - 1),
+    currentDay.getTime() - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
   ]
 }
 
 export function DatesTitle() {
 
   const dates = getLast4Days()
+  console.log(dates)
 
   return (
     <View style={styles.container}>
