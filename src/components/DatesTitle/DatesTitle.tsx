@@ -24,7 +24,6 @@ function getLast4Days() {
 export function DatesTitle() {
 
   const dates = getLast4Days()
-  console.log(dates)
 
   return (
     <View style={styles.container}>
@@ -49,12 +48,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   date: {
-    marginLeft: 20,
+    marginHorizontal: 8,
     alignItems: 'center',
   },
   text: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 12
+    fontSize: 11
   }
 });
