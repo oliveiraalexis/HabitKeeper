@@ -32,8 +32,8 @@ export function DatesTitle() {
           (date: number, key) => 
           (
             <View style={styles.date} key={key}>
-              <Text style={styles.text}>{new Date(date).getDate()}</Text>
-              <Text style={styles.text}>{weekday[new Date(date).getDay()]}</Text>
+              <Text style={styles.days}>{new Date(date).getDate()}</Text>
+              <Text style={styles.weekdays}>{weekday[new Date(date).getDay()]}</Text>
             </View>
           )
         )
@@ -51,9 +51,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     alignItems: 'center',
   },
-  text: {
+  days: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 11
+  },
+  weekdays: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 10
   }
 });

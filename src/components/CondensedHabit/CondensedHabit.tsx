@@ -12,7 +12,7 @@ type CondensedHabitProp = {
 export function CondensedHabit({habit}: CondensedHabitProp) {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.title}>
         <Text style={styles.text}>{habit.title}</Text>
       </View>
       <View style={styles.dates}>
@@ -34,15 +34,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 10,
     height: 70,
-    marginTop: 10
+    marginTop: 10,
+    paddingLeft: 10,
+    paddingVertical: 10
 
   },
   text: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
-    marginHorizontal: 15
+    fontWeight: 'bold'
+  },
+  title: {
+    width: '57%',
+    alignContent: 'flex-end'
   },
   dates: {
+    width: '43%',
     flexDirection: 'row',
     justifyContent: 'flex-end'
   }

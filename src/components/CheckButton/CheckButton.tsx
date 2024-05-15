@@ -12,7 +12,7 @@ export function CheckButton({isCheckedDay}: CheckButtonProps){
 
   return (
     <TouchableOpacity style={styles.container}>
-      <Icon name={iconName} color={iconColor} size={23}/>
+      <Icon name={iconName} color={iconColor} size={26}/>
     </TouchableOpacity>
   )
 
@@ -21,7 +21,7 @@ export function CheckButton({isCheckedDay}: CheckButtonProps){
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 8,
+    padding: 4.7,
     borderRadius: 8
   }
 })
