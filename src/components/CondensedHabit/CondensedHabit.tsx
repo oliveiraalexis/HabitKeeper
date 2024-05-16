@@ -18,7 +18,7 @@ export function CondensedHabit({habit}: CondensedHabitProp) {
       <View style={styles.dates}>
         {
           habit.last4Days.map((day, key) =>{
-            return <CheckButton isCheckedDay={day}/>
+            return <CheckButton isCheckedDay={day} key={key}/>
           })
         }
       </View>
