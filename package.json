@@ -10,9 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4",
     "@types/react-native-vector-icons": "latest",
     "react": "18.2.0",
     "react-native": "0.74.1",
+    "react-native-gesture-handler": "^2.16.2",
+    "react-native-reanimated": "^3.11.0",
     "react-native-vector-icons": "latest"
   },
   "devDependencies": {
