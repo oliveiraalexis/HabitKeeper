@@ -15,7 +15,7 @@ export function TextInput (){
                     onChangeText={() => null}
                     // value={''}
                     // defaultValue={''}
-                    maxLength={48}
+                    maxLength={30}
                 />
             </View>
         </View>
