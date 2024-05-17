@@ -1,17 +1,18 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
 import { CheckButton } from '../CheckButton/CheckButton'
 
 type CondensedHabitProp = {
   habit: {
     title: string,
     last4Days: boolean[]
-  }
+  },
+  onPress: () => void
 }
 
-export function CondensedHabit({habit}: CondensedHabitProp) {
+export function CondensedHabit({habit, onPress}: CondensedHabitProp) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.title}>
         <Text style={styles.text}>{habit.title}</Text>
       </View>
@@ -22,7 +23,7 @@ export function CondensedHabit({habit}: CondensedHabitProp) {
           })
         }
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

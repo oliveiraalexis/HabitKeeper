@@ -8,13 +8,14 @@ type buttonProps = {
         color: string,
         size: number
     },
-    text?: string
+    text?: string,
+    goBack: () => void
 }
 
-export function Button({icon, text}: buttonProps){
+export function Button({icon, text, goBack}: buttonProps){
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={goBack}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
             {text && <Text style={styles.text}>{text}</Text>}
         </TouchableOpacity>
