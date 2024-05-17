@@ -4,19 +4,20 @@ import { Button } from '../Button/Button'
 
 type HeaderProp = {
   title: string, 
-  isDetailScreen: boolean
+  isDetailScreen: boolean,
+  goBack?: () => void
 }
 
-export function Header({title, isDetailScreen}: HeaderProp): React.JSX.Element {
+export function Header({title, isDetailScreen, goBack = () => {}}: HeaderProp): React.JSX.Element {
   
   const headerAlignment = isDetailScreen ? 'flex-start' : 'space-between'
  
   return (
     <View style={{...styles.container, justifyContent: headerAlignment}}>
-      {!isDetailScreen && <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}}/>}
-      {isDetailScreen && <Button icon={{name:"chevron-back", color:"#ffffff", size:25}}/>}
+      {!isDetailScreen && <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} goBack={goBack}/>}
+      {isDetailScreen && <Button icon={{name:"chevron-back", color:"#ffffff", size:25}} goBack={goBack}/>}
       <Text style={styles.text}>{title}</Text>
-      {!isDetailScreen && <Button icon={{name:"add", color:"#ffffff", size:25}}/>}
+      {!isDetailScreen && <Button icon={{name:"add", color:"#ffffff", size:25}} goBack={goBack}/>}
     </View>
   )
 }
