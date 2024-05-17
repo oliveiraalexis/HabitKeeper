@@ -1,11 +1,13 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { HabitListScreen } from './pages/HabitListScreen'
+import { HabitDetailScreen } from './pages/HabitDetailScreen'
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
-      <HabitListScreen/>
+      {/* <HabitListScreen/> */}
+      <HabitDetailScreen/>
     </SafeAreaView>
   )
 }
