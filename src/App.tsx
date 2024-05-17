@@ -2,13 +2,26 @@ import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { HabitListScreen } from './pages/HabitListScreen'
 import { HabitDetailScreen } from './pages/HabitDetailScreen'
+import { NavigationContainer } from '@react-navigation/native'
+import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack'
+
+type StackNavigation = {
+  HabitListScreen: undefined,
+  HabitDetailScreen: undefined
+}
+export type StackTypes = NativeStackNavigationProp<StackNavigation>
 
 function App(): React.JSX.Element {
+
+  const Stack = createNativeStackNavigator()
+
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <HabitListScreen/> */}
-      <HabitDetailScreen/>
-    </SafeAreaView>
+    <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='ListsScreen'>
+          <Stack.Screen name="HabitListScreen" component={HabitListScreen} />
+          <Stack.Screen name="HabitDetailScreen" component={HabitDetailScreen} />
+        </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
