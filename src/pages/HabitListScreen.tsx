@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { SafeAreaView, View, StyleSheet } from 'react-native'
+import { SafeAreaView, View, StyleSheet, Text } from 'react-native'
 import { Header } from '../components/Header/Header'
 import { DatesTitle } from '../components/DatesTitle/DatesTitle'
 import { CondensedHabit } from '../components/CondensedHabit/CondensedHabit'
@@ -20,7 +20,8 @@ export function HabitListScreen(){
     <SafeAreaView style={styles.container}>
       <Header title='HÁBITOS' isDetailScreen={false}/>
       <DatesTitle/>
-      <CondensedHabit habit={{title: 'Primeiro hábito para teste', last4Days: [false, true, true, true]}} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+      <CondensedHabit habit={{title: 'Ler 5 páginas por dia', last4Days: [false, true, true, true]}} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+      <Text style={styles.text}>Você ainda não criou nenhum hábito. Toque no botão “+” acima para adicionar um novo hábito.</Text>
       <BottomSheet
         ref={bottomSheetRef}
         index={0}
@@ -58,5 +59,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20
-}
+  },
+  text: {
+    textAlign: 'center',
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 15,
+    paddingVertical: 30,
+    paddingHorizontal: 15
+  }
 })
