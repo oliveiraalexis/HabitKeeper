@@ -15,7 +15,7 @@ export function HabitListScreen(){
   return (
     <GestureHandlerRootView>
     <SafeAreaView style={{flex: 1}}>
-      <Header title='HÁBITOS'/>
+      <Header title='HÁBITOS' isDetailScreen={false}/>
       <DatesTitle/>
       <CondensedHabit habit={{title: 'Primeiro hábitovd fvfdvfd vdvdvfv regege egregeg', last4Days: [false, true, true, true]}}/>
       <CondensedHabit habit={{title: 'Segundo hábito', last4Days: [true, true, false, true]}}/>
