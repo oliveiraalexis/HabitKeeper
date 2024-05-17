@@ -2,13 +2,14 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button } from '../Button/Button'
 
-export function Header({title}: { title: string; }): React.JSX.Element {
+export function Header({title, isDetailScreen}: { title: string, isDetailScreen: boolean }): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}}/>
+      {!isDetailScreen && <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}}/>}
+      {isDetailScreen && <Button icon={{name:"chevron-back", color:"#ffffff", size:25}}/>}
       <Text style={styles.text}>{title}</Text>
-      <Button icon={{name:"add", color:"#ffffff", size:25}}/>
+      {!isDetailScreen && <Button icon={{name:"add", color:"#ffffff", size:25}}/>}
     </View>
   )
 }
