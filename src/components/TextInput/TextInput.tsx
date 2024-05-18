@@ -9,13 +9,15 @@ export function TextInput (){
         <View style={styles.container}>
             
             <View>
-                <Text style={styles.text}>Hábito:</Text>
                 <TextInputRN
                     style={styles.input}
                     onChangeText={() => null}
+                    placeholder='Qual hábito você deseja criar?'
+                    placeholderTextColor='#dad9d9'
+                    selectionColor='#222638'
+                    maxLength={30}
                     // value={''}
                     // defaultValue={''}
-                    maxLength={30}
                 />
             </View>
         </View>
@@ -27,20 +29,15 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%'
     },
-    text: {
-        color: '#ffffff',
-        fontWeight: 'bold',
-        fontSize: 15
-    },
     input: {
         height: 40,
         width: '100%',
         borderRadius: 10,
         paddingVertical: 5,
         paddingStart: 10,
-        backgroundColor: '#D9D9D9',
-        fontSize: 15,
-        fontWeight: 'bold',
-        marginTop: 7
+        backgroundColor: '#444c6e',
+        fontSize: 14,
+        marginTop: 7,
+        color: '#dad9d9'
     }
 })
