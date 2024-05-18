@@ -9,13 +9,19 @@ type buttonProps = {
         size: number
     },
     text?: string,
+    padding: number,
+    height?: number,
+    width?: number,
     goBack: () => void
 }
 
-export function Button({icon, text, goBack}: buttonProps){
+export function Button({icon, text, padding = 10, height, width, goBack}: buttonProps){
+
+    const buttonHeight = (height) ? {height: height} : {}
+    const buttonWidth = (width) ? {width: width} : {}
 
     return (
-        <TouchableOpacity style={styles.container} onPress={goBack}>
+        <TouchableOpacity style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding}} onPress={goBack}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
             {text && <Text style={styles.text}>{text}</Text>}
         </TouchableOpacity>
@@ -30,6 +36,9 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     text: {
-        marginLeft: 10
+        marginLeft: 5,
+        color: '#ffffff',
+        fontWeight: 'bold',
+        fontSize: 15
     }
 })

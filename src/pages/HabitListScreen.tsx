@@ -26,14 +26,14 @@ export function HabitListScreen(){
         ref={bottomSheetRef}
         index={0}
         onChange={() => {}}
-        backgroundStyle={{backgroundColor: '#253153'}}
+        backgroundStyle={{backgroundColor: '#3a4161'}}
         enableDynamicSizing={true}
       >
         <BottomSheetScrollView>
           <View style={styles.contentContainer}>
             <View style={styles.buttons}>
-                <Button icon={{name:'close-sharp', color:'#f81010', size:25}} goBack={() => {}}/>
-                <Button icon={{name:'checkmark-sharp', color:'#0dd175', size:25}} goBack={() => {}}/>
+                <Button icon={{name:"close-sharp", color:"#ffffff", size:20}} text='Cancelar' padding={-5} height={30} goBack={() => {}}/>
+                <Button icon={{name:"checkmark-sharp", color:"#ffffff", size:20}} text='Concluir' padding={0} height={30} goBack={() => {}}/>
             </View>
             <TextInput/>
           </View>
