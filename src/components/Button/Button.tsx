@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-type buttonProps = {
+type buttonProps = TouchableOpacityProps & {
     icon?: {
         name: string,
         color: string,
@@ -12,18 +12,17 @@ type buttonProps = {
     padding?: number,
     height?: number,
     width?: number,
-    isDisabled?: boolean,
     goBack: () => void
 }
 
-export function Button({icon, text, padding = 10, height, width, isDisabled = false, goBack}: buttonProps){
+export function Button({icon, text, padding = 10, height, width, disabled = false, goBack}: buttonProps){
 
     const buttonHeight = (height) ? {height: height} : {}
     const buttonWidth = (width) ? {width: width} : {}
-    const buttonOpacity = isDisabled ? 0.3 : 1
+    const buttonOpacity = disabled ? 0.3 : 1
 
     return (
-        <TouchableOpacity disabled={isDisabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={goBack}>
+        <TouchableOpacity disabled={disabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={goBack}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
             {text && <Text style={styles.text}>{text}</Text>}
         </TouchableOpacity>

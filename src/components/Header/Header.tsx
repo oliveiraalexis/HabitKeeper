@@ -14,12 +14,12 @@ export function Header({title, isDetailScreen, goBack = () => {}}: HeaderProp): 
     <View>
       {!isDetailScreen && 
         <View style={styles.ListContainer}>
-          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} goBack={goBack} isDisabled={true}/>
+          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} goBack={goBack} disabled={true}/>
           <Text style={styles.text}>{title}</Text>
           <Button icon={{name:"add", color:"#ffffff", size:25}} goBack={goBack}/>
         </View>
       }
-
+      
       {isDetailScreen && 
         <View style={styles.detailContainer}>
           <Button icon={{name:"chevron-back", color:"#ffffff", size:25}} goBack={goBack}/>
