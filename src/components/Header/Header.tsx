@@ -14,7 +14,7 @@ export function Header({title, isDetailScreen, goBack = () => {}}: HeaderProp): 
     <View>
       {!isDetailScreen && 
         <View style={styles.ListContainer}>
-          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} goBack={goBack}/>
+          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} goBack={goBack} isDisabled={true}/>
           <Text style={styles.text}>{title}</Text>
           <Button icon={{name:"add", color:"#ffffff", size:25}} goBack={goBack}/>
         </View>

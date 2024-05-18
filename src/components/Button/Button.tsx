@@ -12,16 +12,18 @@ type buttonProps = {
     padding?: number,
     height?: number,
     width?: number,
+    isDisabled?: boolean,
     goBack: () => void
 }
 
-export function Button({icon, text, padding = 10, height, width, goBack}: buttonProps){
+export function Button({icon, text, padding = 10, height, width, isDisabled = false, goBack}: buttonProps){
 
     const buttonHeight = (height) ? {height: height} : {}
     const buttonWidth = (width) ? {width: width} : {}
+    const buttonOpacity = isDisabled ? 0.3 : 1
 
     return (
-        <TouchableOpacity style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding}} onPress={goBack}>
+        <TouchableOpacity disabled={isDisabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={goBack}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
             {text && <Text style={styles.text}>{text}</Text>}
         </TouchableOpacity>
