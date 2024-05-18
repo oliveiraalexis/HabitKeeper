@@ -11,7 +11,7 @@ export function HabitDetailScreen(){
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title='Primeiro hábitovd fvfdvfd' isDetailScreen={true} goBack={() => navigation.goBack()}/>
+      <Header title='Ler 5 páginas por dia' isDetailScreen={true} goBack={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
         <Calendar/>
         <Text style={styles.text}>Total de dias marcados: 0</Text>
@@ -27,11 +27,10 @@ const styles = StyleSheet.create({
     padding: 10
   },
   contentContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 30
+    paddingHorizontal: 20
   },
   text:{
-    alignSelf: 'center',
+    textAlign: 'center',
     margin: 30,
     color: '#FFFFFF',
     fontWeight: 'bold',

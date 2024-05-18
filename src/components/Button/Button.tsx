@@ -32,7 +32,6 @@ export function Button({icon, text, padding = 10, height, width, goBack}: button
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: 10,
         borderRadius: 8
     },
     text: {
