@@ -9,7 +9,7 @@ type buttonProps = {
         size: number
     },
     text?: string,
-    padding: number,
+    padding?: number,
     height?: number,
     width?: number,
     goBack: () => void
