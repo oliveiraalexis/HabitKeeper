@@ -12,7 +12,6 @@ type CondensedHabitProp = {
 }
 
 export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) {
-  console.log(habit)
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
