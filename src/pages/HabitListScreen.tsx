@@ -10,7 +10,24 @@ import { TextInput } from '../components/TextInput/TextInput'
 import { useNavigation } from '@react-navigation/native'
 import { StackTypes } from '../App'
 
+export function getLast4Days() {
+  const currentDay = new Date()
+  return [
+    currentDay.getTime() - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
+    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
+  ]
+}
+
 export function HabitListScreen(){
+
+  const last4Days = getLast4Days()
+
+  const habits = [
+    {name: 'Ler 5 páginas por dia', trackedDays: last4Days},
+    {name: 'Estudar inglês por 1h', trackedDays: last4Days}
+  ]
 
   const bottomSheetRef = useRef<BottomSheet>(null)
   const navigation = useNavigation<StackTypes>()
@@ -19,8 +36,10 @@ export function HabitListScreen(){
     <GestureHandlerRootView>
     <SafeAreaView style={styles.container}>
       <Header title='HÁBITOS' isDetailScreen={false}/>
-      <DatesTitle/>
-      <CondensedHabit habit={{title: 'Ler 5 páginas por dia', last4Days: [false, true, true, true]}} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+      <DatesTitle last4Days={last4Days}/>
+      {habits.map((habit, key) => (
+        <CondensedHabit habit={habit} last4Days={last4Days} key={key} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+      ))}
       <Text style={styles.text}>Você ainda não criou nenhum hábito. Toque no botão “+” acima para adicionar um novo hábito.</Text>
       <BottomSheet
         ref={bottomSheetRef}
