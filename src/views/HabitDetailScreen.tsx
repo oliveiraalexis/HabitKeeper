@@ -11,7 +11,7 @@ export function HabitDetailScreen(){
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title='Ler 5 páginas por dia' isDetailScreen={true} goBack={() => navigation.goBack()}/>
+      <Header title='Ler 5 páginas por dia' isDetailScreen={true} onPress={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
         <Calendar/>
         <Text style={styles.text}>Total de dias marcados: 0</Text>
