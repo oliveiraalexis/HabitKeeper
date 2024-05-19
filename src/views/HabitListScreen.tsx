@@ -10,20 +10,12 @@ import { TextInput } from '../components/TextInput/TextInput'
 import { useNavigation } from '@react-navigation/native'
 import { StackTypes } from '../App'
 import { useHabit } from '../controllers/useHabit'
+import { useLast4Days } from '../hooks/useLast4Days'
 
-export function getLast4Days() {
-  const currentDay = new Date()
-  return [
-    currentDay.getTime() - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-  ]
-}
 
 export function HabitListScreen(){
 
-  const last4Days = getLast4Days()
+  const last4Days = useLast4Days()
   const {habits} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
   const navigation = useNavigation<StackTypes>()
