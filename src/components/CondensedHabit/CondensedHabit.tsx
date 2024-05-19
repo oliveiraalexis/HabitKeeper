@@ -20,8 +20,8 @@ export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) 
       </View>
       <View style={styles.dates}>
         {
-          habit.trackedDays.map((day, key) =>{
-            return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(last4Days[key]).getDate())} key={key}/>
+          last4Days.map((day, key) =>{
+            return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(habit.trackedDays[key]).getDate())} key={key}/>
           })
         }
       </View>
