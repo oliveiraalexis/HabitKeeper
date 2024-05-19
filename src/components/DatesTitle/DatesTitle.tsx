@@ -10,25 +10,12 @@ const weekday = [
   'SEX',
   'SÁB'
 ]
-
-function getLast4Days() {
-  const currentDay = new Date()
-  return [
-    currentDay.getTime() - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-    currentDay.setDate(currentDay.getDate() - 1) - currentDay.getTimezoneOffset()*60000,
-  ]
-}
-
-export function DatesTitle() {
-
-  const dates = getLast4Days()
+export function DatesTitle({last4Days}: {last4Days: number[]}) {
 
   return (
     <View style={styles.container}>
       {
-        dates.map(
+        last4Days.map(
           (date: number, key) => 
           (
             <View style={styles.date} key={key}>
