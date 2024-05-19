@@ -4,22 +4,25 @@ import { CheckButton } from '../CheckButton/CheckButton'
 
 type CondensedHabitProp = {
   habit: {
-    title: string,
-    last4Days: boolean[]
+    name: string,
+    trackedDays: number[]
   },
+  last4Days: number[],
   onPress: () => void
 }
 
-export function CondensedHabit({habit, onPress}: CondensedHabitProp) {
+export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) {
+  console.log(habit)
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.title}>
-        <Text style={styles.text}>{habit.title}</Text>
+        <Text style={styles.text}>{habit.name}</Text>
       </View>
       <View style={styles.dates}>
         {
-          habit.last4Days.map((day, key) =>{
-            return <CheckButton isCheckedDay={day} key={key}/>
+          habit.trackedDays.map((day, key) =>{
+            return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(last4Days[key]).getDate())} key={key}/>
           })
         }
       </View>
