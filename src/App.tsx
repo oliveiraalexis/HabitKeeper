@@ -1,7 +1,7 @@
 import React from 'react'
-import { SafeAreaView, StyleSheet } from 'react-native'
-import { HabitListScreen } from './pages/HabitListScreen'
-import { HabitDetailScreen } from './pages/HabitDetailScreen'
+import { StyleSheet } from 'react-native'
+import { HabitListScreen } from './views/HabitListScreen'
+import { HabitDetailScreen } from './views/HabitDetailScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack'
 
