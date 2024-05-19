@@ -12,17 +12,17 @@ type buttonProps = TouchableOpacityProps & {
     padding?: number,
     height?: number,
     width?: number,
-    goBack: () => void
+    onPress?: () => void
 }
 
-export function Button({icon, text, padding = 10, height, width, disabled = false, goBack}: buttonProps){
+export function Button({icon, text, padding = 10, height, width, disabled = false, onPress}: buttonProps){
 
     const buttonHeight = (height) ? {height: height} : {}
     const buttonWidth = (width) ? {width: width} : {}
     const buttonOpacity = disabled ? 0.3 : 1
 
     return (
-        <TouchableOpacity disabled={disabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={goBack}>
+        <TouchableOpacity disabled={disabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={onPress}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
             {text && <Text style={styles.text}>{text}</Text>}
         </TouchableOpacity>
