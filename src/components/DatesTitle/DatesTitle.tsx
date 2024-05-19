@@ -16,7 +16,7 @@ export function DatesTitle({last4Days}: {last4Days: number[]}) {
     <View style={styles.container}>
       {
         last4Days.map(
-          (date: number, key) => 
+          (date, key) => 
           (
             <View style={styles.date} key={key}>
               <Text style={styles.days}>{new Date(date).getDate()}</Text>
