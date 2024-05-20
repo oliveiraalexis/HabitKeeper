@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+import { axiosBase } from "../helpers/axiosBase"
+import { Alert } from "react-native"
 
 export function useHabit() {
 
@@ -9,18 +11,24 @@ export function useHabit() {
     getHabits(userId)
   }, [])
 
-  function getHabits(userId: string) {
-    fetch(`http://192.168.1.12:3000/user/${userId}/habits`)
-      .then(res => res.json())
-      .then((data) => setHabits(data))
-      .catch((error) => console.log('error:',error.message))
-  }
+  async function getHabits(userId: string) {
 
-  function getHabit(userId: string, habitId: string) {
-    fetch(`http://192.168.1.12:3000/${userId}//habit/${habitId}`)
-      .then(res => res.json())
-      .then((data) => setHabits(data))
-      .catch((error) => console.log('error:',error.message))
+    try {
+      const response = await axiosBase.get(`/user/${userId}/habits`)
+      setHabits(response.data)
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível carregar seus hábitos. Verifique sua conexão ou tente novamente mais tarde.')
+    }
+  }
+  
+
+  async function getHabit(userId: string, habitId: string) {
+    try {
+      const response = await axiosBase.get(`/${userId}//habit/${habitId}`)
+      setHabits(response.data)
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível carregar os dados do hábito. Verifique sua conexão ou tente novamente mais tarde.')
+    }
   }
 
   return {habits, getHabits, getHabit}
