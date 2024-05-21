@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, View, TouchableHighlight} from 'react-native'
 import { CheckButton } from '../CheckButton/CheckButton'
 
 type CondensedHabitProp = {
@@ -14,32 +14,36 @@ type CondensedHabitProp = {
 export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) {
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.title}>
-        <Text style={styles.text}>{habit.name}</Text>
+    <TouchableHighlight onPress={onPress} underlayColor={'#444c6e'} style={styles.touchable}>
+      <View style={styles.container}>
+        <View style={styles.title}>
+          <Text style={styles.text}>{habit.name}</Text>
+        </View>
+        <View style={styles.dates}>
+          {
+            last4Days.map((day, key) =>{
+              return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(habit.trackedDays[key]).getDate())} key={key}/>
+            })
+          }
+        </View>
       </View>
-      <View style={styles.dates}>
-        {
-          last4Days.map((day, key) =>{
-            return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(habit.trackedDays[key]).getDate())} key={key}/>
-          })
-        }
-      </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
+  touchable: {
     backgroundColor: '#292f47',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     borderRadius: 10,
     height: 70,
     marginTop: 10,
-    paddingLeft: 10,
-    paddingVertical: 10
+    paddingLeft: 10
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '100%'
 
   },
   text: {
