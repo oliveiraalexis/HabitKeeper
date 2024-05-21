@@ -1,22 +1,21 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SafeAreaView, View, StyleSheet, Text } from 'react-native'
 import { Header } from '../components/Header/Header'
 import { DatesTitle } from '../components/DatesTitle/DatesTitle'
 import { CondensedHabit } from '../components/CondensedHabit/CondensedHabit'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet'
-import { Button } from '../components/Button/Button'
-import { TextInput } from '../components/TextInput/TextInput'
+import { HabitForm } from '../components/HabitForm/HabitForm'
 import { useNavigation } from '@react-navigation/native'
 import { StackTypes } from '../App'
 import { useHabit } from '../controllers/useHabit'
 import { useLast4Days } from '../hooks/useLast4Days'
 
-
 export function HabitListScreen(){
 
+  const [habits, setHabits] = useState([])
   const last4Days = useLast4Days()
-  const {habits} = useHabit()
+  const {userId, getHabits} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
   const navigation = useNavigation<StackTypes>()
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false)
@@ -24,6 +23,15 @@ export function HabitListScreen(){
   function toggleBottomSheet(){
     setIsBottomSheetVisible(prev => !prev)
   }
+
+  async function searchHabits() {
+    const arrayHabits = await getHabits(userId)
+    setHabits(arrayHabits)
+  }
+
+  useEffect(() => {
+    searchHabits()
+  }, [])
 
   return (
     <GestureHandlerRootView>
@@ -56,11 +64,7 @@ export function HabitListScreen(){
         >
           <BottomSheetScrollView>
             <View style={styles.contentContainer}>
-              <View style={styles.buttons}>
-                  <Button icon={{name:"close-sharp", color:"#ffffff", size:20}} text='Cancelar' padding={-5} height={30} onPress={toggleBottomSheet}/>
-                  <Button icon={{name:"checkmark-sharp", color:"#ffffff", size:20}} text='Concluir' padding={0} height={30} onPress={() => {}}/>
-              </View>
-              <TextInput/>
+              <HabitForm toggleBottomSheet={toggleBottomSheet} getHabits={searchHabits}/>
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
@@ -80,11 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     marginBottom: 30
-  },
-  buttons:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20
   },
   text: {
     textAlign: 'center',
