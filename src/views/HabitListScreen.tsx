@@ -10,6 +10,8 @@ import { useNavigation } from '@react-navigation/native'
 import { StackTypes } from '../App'
 import { useHabit } from '../controllers/useHabit'
 import { useLast4Days } from '../hooks/useLast4Days'
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { Button } from '../components/Button/Button'
 
 export function HabitListScreen(){
 
@@ -49,14 +51,23 @@ export function HabitListScreen(){
         habits.length > 0 &&
         <DatesTitle last4Days={last4Days}/>
       }
-      <ScrollView
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
-      >
         {
           habits.length > 0 &&
-            habits.map((habit, key) => (
-              <CondensedHabit habit={habit} last4Days={last4Days} key={key} onPress={() => navigation.navigate('HabitDetailScreen')}/>
-            ))
+          <SwipeListView
+          data={habits}
+          renderItem={({item, index}) => (
+            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+          )}
+          renderHiddenItem={ (data, rowMap) => (
+            <View style={styles.swipe}>
+                <Button icon={{name:"pencil", color:"#ffffff", size:20}} onPress={() => {}} />
+                <Button icon={{name:"trash", color:"#ffffff", size:20}} onPress={() => {}} />
+            </View>
+          )}
+          rightOpenValue={-90}
+          disableRightSwipe={true}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+          />
         }
         {
           habits.length == 0 &&
@@ -64,7 +75,6 @@ export function HabitListScreen(){
             Você ainda não criou nenhum hábito. Toque no botão “+” acima para adicionar um novo hábito.
           </Text>
         }
-      </ScrollView>
       {
         isBottomSheetVisible &&
         <BottomSheet
@@ -104,5 +114,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingVertical: 30,
     paddingHorizontal: 15
+  },
+  swipe: {
+    flexDirection: 'row',
+    backgroundColor: '#444c6e',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderRadius: 10,
+    height: 70,
+    marginTop: 10,
+    paddingLeft: 10,
+    paddingVertical: 10
   }
 })
