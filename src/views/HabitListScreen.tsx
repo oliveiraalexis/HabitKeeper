@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView, View, StyleSheet, Text } from 'react-native'
+import { SafeAreaView, View, StyleSheet, Text, RefreshControl, ScrollView } from 'react-native'
 import { Header } from '../components/Header/Header'
 import { DatesTitle } from '../components/DatesTitle/DatesTitle'
 import { CondensedHabit } from '../components/CondensedHabit/CondensedHabit'
@@ -13,12 +13,14 @@ import { useLast4Days } from '../hooks/useLast4Days'
 
 export function HabitListScreen(){
 
-  const [habits, setHabits] = useState([])
   const last4Days = useLast4Days()
   const {userId, getHabits} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
   const navigation = useNavigation<StackTypes>()
+  
+  const [habits, setHabits] = useState([])
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false)
+  const [refreshing, setRefreshing] = React.useState(false)
 
   function toggleBottomSheet(){
     setIsBottomSheetVisible(prev => !prev)
@@ -27,6 +29,12 @@ export function HabitListScreen(){
   async function searchHabits() {
     const arrayHabits = await getHabits(userId)
     setHabits(arrayHabits)
+  }
+
+  function onRefresh() {
+    setRefreshing(true)
+    searchHabits()
+    setRefreshing(false)
   }
 
   useEffect(() => {
@@ -41,18 +49,22 @@ export function HabitListScreen(){
         habits.length > 0 &&
         <DatesTitle last4Days={last4Days}/>
       }
-      {
-        habits.length > 0 &&
-        habits.map((habit, key) => (
-          <CondensedHabit habit={habit} last4Days={last4Days} key={key} onPress={() => navigation.navigate('HabitDetailScreen')}/>
-        ))
-      }
-      {
-        habits.length == 0 &&
-        <Text style={styles.text}>
-          Você ainda não criou nenhum hábito. Toque no botão “+” acima para adicionar um novo hábito.
-        </Text>
-      }
+      <ScrollView
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+      >
+        {
+          habits.length > 0 &&
+            habits.map((habit, key) => (
+              <CondensedHabit habit={habit} last4Days={last4Days} key={key} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+            ))
+        }
+        {
+          habits.length == 0 &&
+          <Text style={styles.text}>
+            Você ainda não criou nenhum hábito. Toque no botão “+” acima para adicionar um novo hábito.
+          </Text>
+        }
+      </ScrollView>
       {
         isBottomSheetVisible &&
         <BottomSheet
