@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView, View, StyleSheet, Text, RefreshControl, ScrollView } from 'react-native'
+import { SafeAreaView, View, StyleSheet, Text, RefreshControl, Alert } from 'react-native'
 import { Header } from '../components/Header/Header'
 import { DatesTitle } from '../components/DatesTitle/DatesTitle'
 import { CondensedHabit } from '../components/CondensedHabit/CondensedHabit'
@@ -16,7 +16,7 @@ import { Button } from '../components/Button/Button'
 export function HabitListScreen(){
 
   const last4Days = useLast4Days()
-  const {userId, getHabits} = useHabit()
+  const {userId, getHabits, deleteHabit} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
   const navigation = useNavigation<StackTypes>()
   
@@ -37,6 +37,11 @@ export function HabitListScreen(){
     setRefreshing(true)
     searchHabits()
     setRefreshing(false)
+  }
+
+  async function delHabit(habitId: string){
+    const status = await deleteHabit(habitId)
+    if (status == 200) searchHabits()
   }
 
   useEffect(() => {
@@ -61,7 +66,24 @@ export function HabitListScreen(){
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>
                 <Button icon={{name:"pencil", color:"#ffffff", size:20}} onPress={() => {}} />
-                <Button icon={{name:"trash", color:"#ffffff", size:20}} onPress={() => {}} />
+                <Button 
+                  icon={{name:"trash", color:"#ffffff", size:20}} 
+                  onPress={
+                    () => Alert.alert('Atenção', 'Deseja realmente excluir o hábito?', 
+                      [
+                        {
+                          text: 'Cancelar',
+                          onPress: () => {},
+                          style: 'cancel',
+                        },
+                        {
+                          text: 'OK',
+                          onPress: () => delHabit(data.item['_id']),
+                        },
+                      ]
+                    )
+                  }
+                />
             </View>
           )}
           rightOpenValue={-90}
