@@ -41,5 +41,15 @@ export function useHabit() {
     }
   }
 
-  return {userId, getHabits, getHabit, createHabit}
+  async function deleteHabit(habitId: string) {
+    try {
+      const response = await axiosBase.post(`/habit`, habitId)
+      return response.status
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível excluir o hábito. Verifique sua conexão ou tente novamente mais tarde.')
+      return {}
+    }
+  }
+
+  return {userId, getHabits, getHabit, createHabit, deleteHabit}
 }
