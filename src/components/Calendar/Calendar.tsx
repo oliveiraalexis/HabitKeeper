@@ -6,7 +6,7 @@ export function Calendar(){
 
   const [selected, setSelected] = useState('');
 
-  const INITIAL_DATE = '2024-05-17';
+  const INITIAL_DATE = '2024-05-20';
 
   const getDate = (count: number) => {
     const date = new Date(INITIAL_DATE);
