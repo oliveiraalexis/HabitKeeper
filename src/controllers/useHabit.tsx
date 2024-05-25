@@ -19,9 +19,10 @@ export function useHabit() {
 
   async function getHabit(userId: string, habitId: string) {
     try {
-      const response = await axiosBase.get(`/${userId}/habit/${habitId}`)
+      const response = await axiosBase.get(`/user/${userId}/habit/${habitId}`)
       return response.data
     } catch(error: any){
+      console.log(error)
       Alert.alert('Atenção', 'Não foi possível carregar os dados do hábito. Verifique sua conexão ou tente novamente mais tarde.')
       return {}
     }
