@@ -2,17 +2,23 @@ import React, {useState} from 'react'
 import { StyleSheet } from 'react-native'
 import {Calendar as CalendarRN, CalendarUtils} from 'react-native-calendars';
 
-export function Calendar(){
+export function Calendar({trackedDays}: {trackedDays: string[]}){
 
   const [selected, setSelected] = useState('');
 
-  const INITIAL_DATE = '2024-05-20';
+  type HabitCalendarType = {
+    selectedColor: string;
+    selected: boolean;
+};
 
-  const getDate = (count: number) => {
-    const date = new Date(INITIAL_DATE);
-    const newDate = date.setDate(date.getDate() + count);
-    return CalendarUtils.getCalendarDateString(newDate);
+  type TransformedTrackedDatesType = {
+      [key: string]: HabitCalendarType;
   };
+
+  const transformedTrackedDates: TransformedTrackedDatesType = trackedDays.reduce((acc: TransformedTrackedDatesType, date: string) => {
+    acc[`${new Date(date).getFullYear()}-${(new Date(date).getMonth()+1).toString().padStart(2, "0")}-${new Date(date).getDate()}`] = { selectedColor: '#6676ce', selected: true };
+    return acc;
+  }, {});
 
   return (
     <CalendarRN style={{borderRadius: 7}}
@@ -30,13 +36,7 @@ export function Calendar(){
       onDayPress={day => {
         setSelected(day.dateString);
       }}
-      markedDates={{
-        [selected]: {selected: true, disableTouchEvent: true, selectedColor: '#6676ce'},
-        [getDate(0)]: {selectedColor: '#6676ce', selected: true},
-        [getDate(-1)]: {selectedColor: '#6676ce', selected: true},
-        [getDate(-2)]: {selectedColor: '#6676ce', selected: true},
-        [getDate(-3)]: {selectedColor: '#6676ce', selected: true},
-      }}
+      markedDates={transformedTrackedDates}
     />
   );
 }
