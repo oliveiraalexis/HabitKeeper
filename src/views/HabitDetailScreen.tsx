@@ -1,19 +1,21 @@
-import React from 'react'
-import { View, SafeAreaView, StyleSheet, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, SafeAreaView, StyleSheet, Text, Alert } from 'react-native'
 import { Calendar } from '../components/Calendar/Calendar'
 import { Header } from '../components/Header/Header'
 import { useNavigation } from '@react-navigation/native'
 import { StackTypes } from '../App'
+import { useHabit } from '../controllers/useHabit'
 
-export function HabitDetailScreen(){
+export function HabitDetailScreen({route}: any){
 
   const navigation = useNavigation<StackTypes>()
+  const habit = route.params
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title='Ler 5 páginas por dia' isDetailScreen={true} onPress={() => navigation.goBack()}/>
+      <Header title={habit.name} isDetailScreen={true} onPress={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
-        <Calendar/>
+        <Calendar trackedDays={habit.trackedDays}/>
         <Text style={styles.text}>Total de dias marcados: 0</Text>
       </View>
     </SafeAreaView>
