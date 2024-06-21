@@ -61,7 +61,7 @@ export function HabitListScreen(){
           <SwipeListView
           data={habits}
           renderItem={({item, index}) => (
-            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate('HabitDetailScreen')}/>
+            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate({name: 'HabitDetailScreen',  params: item})}/>
           )}
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>
