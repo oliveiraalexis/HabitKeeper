@@ -1,9 +1,19 @@
 import { axiosBase } from "../helpers/axiosBase"
 import { Alert } from "react-native"
 
+export type HabitProps = {
+  _id: string,
+  name: string,
+  user_id: string,
+  trackedDays: string[],
+  createdAt: string,
+  __v: number
+}
+
 export function useHabit() {
 
   const userId = '6649476dac7f48df621de7af'
+
 
   async function getHabits(userId: string) {
 
@@ -51,5 +61,15 @@ export function useHabit() {
     }
   }
 
-  return {userId, getHabits, getHabit, createHabit, deleteHabit}
+  async function updateHabit(habitId: string, newHabit: HabitProps) {
+    try {
+      const response = await axiosBase.put(`/habit/${habitId}`, newHabit)
+      return response.data
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível editar o hábito. Verifique sua conexão ou tente novamente mais tarde.')
+      return {}
+    }
+  }
+
+  return {userId, getHabits, getHabit, createHabit, deleteHabit, updateHabit}
 }
