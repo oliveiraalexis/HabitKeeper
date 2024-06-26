@@ -21,10 +21,16 @@ export function HabitListScreen(){
   const navigation = useNavigation<StackTypes>()
   
   const [habits, setHabits] = useState([])
+  const [habitToBeEdited, setHabitToBeEdited] = useState('')
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false)
   const [refreshing, setRefreshing] = React.useState(false)
 
-  function toggleBottomSheet(){
+  function toggleBottomSheet(habitId?: string){
+    if (habitId && habitId != '') {
+      setHabitToBeEdited(habitId)
+    } else {
+      setHabitToBeEdited('')
+    }
     setIsBottomSheetVisible(prev => !prev)
   }
 
@@ -51,7 +57,7 @@ export function HabitListScreen(){
   return (
     <GestureHandlerRootView>
     <SafeAreaView style={styles.container}>
-      <Header title='HÁBITOS' isDetailScreen={false} onPress={toggleBottomSheet}/>
+      <Header title='HÁBITOS' isDetailScreen={false} onPress={() => toggleBottomSheet()}/>
       {
         habits.length > 0 &&
         <DatesTitle last4Days={last4Days}/>
@@ -65,7 +71,7 @@ export function HabitListScreen(){
           )}
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>
-                <Button icon={{name:"pencil", color:"#ffffff", size:20}} onPress={() => {}} />
+                <Button icon={{name:"pencil", color:"#ffffff", size:20}} onPress={() => toggleBottomSheet(data.item['_id'])} />
                 <Button 
                   icon={{name:"trash", color:"#ffffff", size:20}} 
                   onPress={
@@ -108,7 +114,7 @@ export function HabitListScreen(){
         >
           <BottomSheetScrollView>
             <View style={styles.contentContainer}>
-              <HabitForm toggleBottomSheet={toggleBottomSheet} getHabits={searchHabits}/>
+              <HabitForm habitToBeEdited={habitToBeEdited} toggleBottomSheet={toggleBottomSheet} getHabits={searchHabits}/>
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
