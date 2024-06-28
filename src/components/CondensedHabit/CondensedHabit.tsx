@@ -1,17 +1,16 @@
 import React from 'react'
 import {StyleSheet, Text, View, TouchableHighlight} from 'react-native'
 import { CheckButton } from '../CheckButton/CheckButton'
+import { HabitProps } from '../../controllers/useHabit'
 
 type CondensedHabitProp = {
-  habit: {
-    name: string,
-    trackedDays: number[]
-  },
+  habit: HabitProps,
   last4Days: number[],
+  searchHabits: () => void,
   onPress: () => void
 }
 
-export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) {
+export function CondensedHabit({habit, last4Days, searchHabits, onPress}: CondensedHabitProp) {
 
   return (
     <TouchableHighlight onPress={onPress} underlayColor={'#444c6e'} style={styles.touchable}>
@@ -22,7 +21,7 @@ export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) 
         <View style={styles.dates}>
           {
             last4Days.map((day, key) =>{
-              return <CheckButton isCheckedDay={(new Date(day).getDate() == new Date(habit.trackedDays[key]).getDate())} key={key}/>
+              return <CheckButton habit={habit} date={day} searchHabits={searchHabits} key={key}/>
             })
           }
         </View>
