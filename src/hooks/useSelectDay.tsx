@@ -18,9 +18,11 @@ export function useSelectDay(){
     return false
   }
 
-  async function updateHabitTracker(habit: HabitProps, date: number, isChecked: boolean, setIsChecked: (v: boolean) => void){
+  async function updateHabitTracker(habit: HabitProps, date: number, isChecked: boolean, setIsChecked?: (v: boolean) => void){
     let newHabit = {...habit}
 
+    console.log('habito antes: ', newHabit)
+    console.log('date formated: ', formatDate(date))
     if (isChecked){
       newHabit.trackedDays = habit.trackedDays.filter((value) => {
         return new Date(parseInt(value)).getDate() != new Date(date).getDate()
@@ -29,8 +31,9 @@ export function useSelectDay(){
       const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
       newHabit.trackedDays.push(newTrackedDay.toString())
     }
+    console.log('habito depois: ', newHabit)
     await updateHabit(habit._id, newHabit)
-    setIsChecked(!isChecked)
+    if (setIsChecked) setIsChecked(!isChecked)
   }
 
 
