@@ -10,19 +10,6 @@ type CheckButtonProps = {
   searchHabits: () => void
 }
 
-function formatDate(timestamp: number){
-  return `${new Date(timestamp).getFullYear()}-${new Date(timestamp).getMonth()+1}-${new Date(timestamp).getDate()}`
-}
-
-// function dateExistsInArray(date: number, trackedDays: string[]){
-
-//   if (trackedDays.length > 0){
-//     const result = trackedDays.find(el => new Date(parseInt(el)).getDate() == new Date(date).getDate())
-//     return result != undefined
-//   }
-//   return false
-// }
-
 export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   
   const [iconColor, setIconColor] = useState('#888888')
