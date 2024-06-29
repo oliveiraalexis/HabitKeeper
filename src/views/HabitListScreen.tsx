@@ -25,7 +25,7 @@ export function HabitListScreen({navigation}: HabitListScreenProps){
   const [habits, setHabits] = useState([])
   const [habitToBeEdited, setHabitToBeEdited] = useState('')
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false)
-  const [refreshing, setRefreshing] = React.useState(false)
+  const [refreshing, setRefreshing] = useState(false)
 
   function toggleBottomSheet(habitId?: string){
     if (habitId && habitId != '') {
@@ -54,7 +54,16 @@ export function HabitListScreen({navigation}: HabitListScreenProps){
 
   useEffect(() => {
     searchHabits()
-  }, [])
+  },[])
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setHabits([])
+      searchHabits()
+    });
+
+    return unsubscribe
+  }, [navigation])
 
   return (
     <GestureHandlerRootView>
@@ -69,7 +78,7 @@ export function HabitListScreen({navigation}: HabitListScreenProps){
           <SwipeListView
           data={habits}
           renderItem={({item, index}) => (
-            <CondensedHabit habit={item} key={index} last4Days={last4Days} searchHabits={searchHabits} onPress={() => navigation.navigate('HabitDetailScreen',  {habitId: item['_id']})}/>
+            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate('HabitDetailScreen',  {habitId: item['_id']})}/>
           )}
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>
