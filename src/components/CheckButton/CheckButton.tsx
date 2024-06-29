@@ -44,7 +44,7 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
 
     if (isChecked){
       newHabit.trackedDays = habit.trackedDays.filter((value) => {
-        new Date(parseInt(value)).getDate() != new Date(date).getDate()
+        return new Date(parseInt(value)).getDate() != new Date(date).getDate()
       })
     } else {
       const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
