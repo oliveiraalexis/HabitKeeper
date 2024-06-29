@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useHabit, HabitProps } from '../../controllers/useHabit'
+import { useSelectDay } from '../../hooks/useSelectDay'
 
 type CheckButtonProps = {
   habit: HabitProps,
@@ -13,14 +14,14 @@ function formatDate(timestamp: number){
   return `${new Date(timestamp).getFullYear()}-${new Date(timestamp).getMonth()+1}-${new Date(timestamp).getDate()}`
 }
 
-function dateExistsInArray(date: number, trackedDays: string[]){
+// function dateExistsInArray(date: number, trackedDays: string[]){
 
-  if (trackedDays.length > 0){
-    const result = trackedDays.find(el => new Date(parseInt(el)).getDate() == new Date(date).getDate())
-    return result != undefined
-  }
-  return false
-}
+//   if (trackedDays.length > 0){
+//     const result = trackedDays.find(el => new Date(parseInt(el)).getDate() == new Date(date).getDate())
+//     return result != undefined
+//   }
+//   return false
+// }
 
 export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   
@@ -28,9 +29,10 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   const [iconColor, setIconColor] = useState('#888888')
   const [iconName, setIconName] = useState('close-circle-outline')
   const [isChecked, setIsChecked] = useState(false)
+  const {formatDate, dateExistInArray, updateHabitTracker} = useSelectDay()
 
   useEffect(() => {
-    setIsChecked(dateExistsInArray(date, habit.trackedDays))
+    setIsChecked(dateExistInArray(date, habit.trackedDays))
   },[])
   
   useEffect(() => {
@@ -39,23 +41,23 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
     searchHabits()
   },[isChecked])
   
-  async function updateHabitTracker(){
-    let newHabit = {...habit}
+  // async function updateHabitTracker(){
+  //   let newHabit = {...habit}
 
-    if (isChecked){
-      newHabit.trackedDays = habit.trackedDays.filter((value) => {
-        return new Date(parseInt(value)).getDate() != new Date(date).getDate()
-      })
-    } else {
-      const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
-      newHabit.trackedDays.push(newTrackedDay.toString())
-    }
-    await updateHabit(habit._id, newHabit)
-    setIsChecked(prev => !prev)
-  }
+  //   if (isChecked){
+  //     newHabit.trackedDays = habit.trackedDays.filter((value) => {
+  //       return new Date(parseInt(value)).getDate() != new Date(date).getDate()
+  //     })
+  //   } else {
+  //     const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
+  //     newHabit.trackedDays.push(newTrackedDay.toString())
+  //   }
+  //   await updateHabit(habit._id, newHabit)
+  //   setIsChecked(prev => !prev)
+  // }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={updateHabitTracker}>
+    <TouchableOpacity style={styles.container} onPress={() => updateHabitTracker(habit, date, isChecked, setIsChecked)}>
       <Icon name={iconName} color={iconColor} size={26}/>
     </TouchableOpacity>
   )
