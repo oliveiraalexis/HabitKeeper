@@ -6,11 +6,10 @@ import { useSelectDay } from '../../hooks/useSelectDay'
 
 type CheckButtonProps = {
   habit: HabitProps,
-  date: number,
-  searchHabits: () => void
+  date: number
 }
 
-export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
+export function CheckButton({habit, date}: CheckButtonProps){
   
   const [iconColor, setIconColor] = useState('#888888')
   const [iconName, setIconName] = useState('close-circle-outline')
@@ -24,7 +23,6 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   useEffect(() => {
     setIconColor(isChecked ? '#6676ce' : '#888888')
     setIconName(isChecked ? 'checkmark-circle-sharp' : 'close-circle-outline')
-    searchHabits()
   },[isChecked])
 
   return (

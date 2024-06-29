@@ -6,11 +6,10 @@ import { HabitProps } from '../../controllers/useHabit'
 type CondensedHabitProp = {
   habit: HabitProps,
   last4Days: number[],
-  searchHabits: () => void,
   onPress: () => void
 }
 
-export function CondensedHabit({habit, last4Days, searchHabits, onPress}: CondensedHabitProp) {
+export function CondensedHabit({habit, last4Days, onPress}: CondensedHabitProp) {
 
   return (
     <TouchableHighlight onPress={onPress} underlayColor={'#444c6e'} style={styles.touchable}>
@@ -21,7 +20,7 @@ export function CondensedHabit({habit, last4Days, searchHabits, onPress}: Conden
         <View style={styles.dates}>
           {
             last4Days.map((day, key) =>{
-              return <CheckButton habit={habit} date={day} searchHabits={searchHabits} key={key}/>
+              return <CheckButton habit={habit} date={day} key={key}/>
             })
           }
         </View>
