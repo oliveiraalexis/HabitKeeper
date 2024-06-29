@@ -16,7 +16,7 @@ export function Calendar({trackedDays}: {trackedDays: string[]}){
   };
 
   const transformedTrackedDates: TransformedTrackedDatesType = trackedDays.reduce((acc: TransformedTrackedDatesType, date: string) => {
-    acc[`${new Date(date).getFullYear()}-${(new Date(date).getMonth()+1).toString().padStart(2, "0")}-${new Date(date).getDate()}`] = { selectedColor: '#6676ce', selected: true };
+    acc[`${new Date(parseInt(date)).getFullYear()}-${(new Date(parseInt(date)).getMonth()+1).toString().padStart(2, "0")}-${new Date(parseInt(date)).getDate()}`] = { selectedColor: '#6676ce', selected: true };
     return acc;
   }, {});
 
