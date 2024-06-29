@@ -7,18 +7,20 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 import { HabitForm } from '../components/HabitForm/HabitForm'
 import { useNavigation } from '@react-navigation/native'
-import { StackTypes } from '../App'
+import { RootStackParamList } from '../App'
 import { useHabit } from '../controllers/useHabit'
 import { useLast4Days } from '../hooks/useLast4Days'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { Button } from '../components/Button/Button'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-export function HabitListScreen(){
+type HabitListScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitListScreen'>;
+
+export function HabitListScreen({navigation}: HabitListScreenProps){
 
   const last4Days = useLast4Days()
   const {userId, getHabits, deleteHabit} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
-  const navigation = useNavigation<StackTypes>()
   
   const [habits, setHabits] = useState([])
   const [habitToBeEdited, setHabitToBeEdited] = useState('')
@@ -67,7 +69,7 @@ export function HabitListScreen(){
           <SwipeListView
           data={habits}
           renderItem={({item, index}) => (
-            <CondensedHabit habit={item} key={index} last4Days={last4Days} searchHabits={searchHabits} onPress={() => navigation.navigate({name: 'HabitDetailScreen',  params: item['_id']})}/>
+            <CondensedHabit habit={item} key={index} last4Days={last4Days} searchHabits={searchHabits} onPress={() => navigation.navigate('HabitDetailScreen',  {habitId: item['_id']})}/>
           )}
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>

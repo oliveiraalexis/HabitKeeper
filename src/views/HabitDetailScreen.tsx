@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { View, SafeAreaView, StyleSheet, Text, Alert } from 'react-native'
 import { Calendar } from '../components/Calendar/Calendar'
 import { Header } from '../components/Header/Header'
-import { useNavigation } from '@react-navigation/native'
-import { StackTypes } from '../App'
+import { RootStackParamList } from '../App'
 import { HabitProps, useHabit } from '../controllers/useHabit'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-export function HabitDetailScreen({route}: any){
+type HabitDetailScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitDetailScreen'>;
 
-  const habitId = route.params
-  const navigation = useNavigation<StackTypes>()
+export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
+
+  const habitId = route.params.habitId
   const [habit, setHabit] = useState<HabitProps>({
     _id: '',
     name: '',
