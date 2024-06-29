@@ -29,7 +29,7 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   const [iconColor, setIconColor] = useState('#888888')
   const [iconName, setIconName] = useState('close-circle-outline')
   const [isChecked, setIsChecked] = useState(false)
-  const {formatDate, dateExistInArray, updateHabitTracker} = useSelectDay()
+  const {dateExistInArray, updateHabitTracker} = useSelectDay()
 
   useEffect(() => {
     setIsChecked(dateExistInArray(date, habit.trackedDays))
