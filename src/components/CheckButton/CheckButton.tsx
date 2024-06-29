@@ -25,7 +25,6 @@ function formatDate(timestamp: number){
 
 export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
   
-  const {updateHabit} = useHabit()
   const [iconColor, setIconColor] = useState('#888888')
   const [iconName, setIconName] = useState('close-circle-outline')
   const [isChecked, setIsChecked] = useState(false)
@@ -40,21 +39,6 @@ export function CheckButton({habit, date, searchHabits}: CheckButtonProps){
     setIconName(isChecked ? 'checkmark-circle-sharp' : 'close-circle-outline')
     searchHabits()
   },[isChecked])
-  
-  // async function updateHabitTracker(){
-  //   let newHabit = {...habit}
-
-  //   if (isChecked){
-  //     newHabit.trackedDays = habit.trackedDays.filter((value) => {
-  //       return new Date(parseInt(value)).getDate() != new Date(date).getDate()
-  //     })
-  //   } else {
-  //     const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
-  //     newHabit.trackedDays.push(newTrackedDay.toString())
-  //   }
-  //   await updateHabit(habit._id, newHabit)
-  //   setIsChecked(prev => !prev)
-  // }
 
   return (
     <TouchableOpacity style={styles.container} onPress={() => updateHabitTracker(habit, date, isChecked, setIsChecked)}>
