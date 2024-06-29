@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, SafeAreaView, StyleSheet, Text, Alert } from 'react-native'
 import { Calendar } from '../components/Calendar/Calendar'
 import { Header } from '../components/Header/Header'
-import { RootStackParamList } from '../App'
+import { RootStackParamList } from '../routes/Routes'
 import { HabitProps, useHabit } from '../controllers/useHabit'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 

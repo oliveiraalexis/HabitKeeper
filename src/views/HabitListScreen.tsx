@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 import { HabitForm } from '../components/HabitForm/HabitForm'
 import { useNavigation } from '@react-navigation/native'
-import { RootStackParamList } from '../App'
+import { RootStackParamList } from '../routes/Routes'
 import { useHabit } from '../controllers/useHabit'
 import { useLast4Days } from '../hooks/useLast4Days'
 import { SwipeListView } from 'react-native-swipe-list-view';
