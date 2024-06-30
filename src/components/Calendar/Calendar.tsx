@@ -31,12 +31,10 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
       theme={{
         calendarBackground: '#292f47',
         dayTextColor: '#ffffff',
+        selectedDayTextColor: '#ffffff',
         todayTextColor: '#6676ce',
         monthTextColor: '#ffffff',
         textSectionTitleColor: '#ffffff',
-        textSectionTitleDisabledColor: 'blue',
-        indicatorColor: 'red',
-        selectedDayBackgroundColor: '#6676ce',
         arrowColor: '#ffffff',
       }}
       onDayPress={day => {
@@ -48,9 +46,3 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#292f47'
-  }
-})
