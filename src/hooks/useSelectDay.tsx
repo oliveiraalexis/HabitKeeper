@@ -29,8 +29,12 @@ export function useSelectDay(){
       const newTrackedDay = new Date(formatDate(date)).getTime() + new Date(formatDate(date)).getTimezoneOffset()*60000
       newHabit.trackedDays.push(newTrackedDay.toString())
     }
-    await updateHabit(habit._id, newHabit)
-    if (setIsChecked) setIsChecked(!isChecked)
+    const result = await updateHabit(habit._id, newHabit)
+    if (Object.values(result).find((el: unknown) => el == 'Hábito atualizado') != undefined){
+      if (setIsChecked) setIsChecked(!isChecked)
+      return true
+    }
+    return false
   }
 
 
