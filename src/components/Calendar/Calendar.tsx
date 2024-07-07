@@ -34,7 +34,6 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
     return `${year}-${month}-${day}`
   }
   
-  console.log(transformDate(Date.now().toString()))
   useEffect(() => {
     const newTrackedDates = habit.trackedDays.reduce((acc: TransformedTrackedDatesType, date: string) => {
       const formattedDate = transformDate(date)
