@@ -21,7 +21,7 @@ type CalendarDayType = {
   year: number
 }
 
-export function Calendar({habit}: {habit: HabitProps}){
+export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: () => void}){
 
   const {updateHabitTracker} = useSelectDay()
   const [transformedTrackedDates, setTransformedTrackedDates] = useState<TransformedTrackedDatesType>({})
@@ -55,7 +55,7 @@ export function Calendar({habit}: {habit: HabitProps}){
         arrowColor: '#ffffff',
       }}
       onDayPress={
-        (day: CalendarDayType) => {
+        async (day: CalendarDayType) => {
           const date = new Date(day.dateString).getTime() + new Date(day.dateString).getTimezoneOffset()*60000
           const isDateSelected = transformedTrackedDates.hasOwnProperty(day.dateString)
           let newTrackedDates = {...transformedTrackedDates}
@@ -66,7 +66,8 @@ export function Calendar({habit}: {habit: HabitProps}){
             newTrackedDates[day.dateString] = { selectedColor: '#6676ce', selected: true }
           }
           setTransformedTrackedDates(newTrackedDates)
-          updateHabitTracker(habit, date, isDateSelected)
+          const result = await updateHabitTracker(habit, date, isDateSelected)
+          if (result) searchHabit()
         }
       }
       markedDates={transformedTrackedDates}
