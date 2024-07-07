@@ -34,7 +34,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
     <SafeAreaView style={styles.container}>
       <Header title={habit.name} isDetailScreen={true} onPress={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
-        <Calendar habit={habit}/>
+        <Calendar habit={habit} searchHabit={searchHabit}/>
         <Text style={styles.text}>Total de dias cumpridos: {habit.trackedDays.length}</Text>
       </View>
     </SafeAreaView>
