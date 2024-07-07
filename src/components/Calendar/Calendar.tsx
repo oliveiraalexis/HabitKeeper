@@ -33,7 +33,8 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
     const day = d.getDate().toString().padStart(2, "0")
     return `${year}-${month}-${day}`
   }
-    
+  
+  console.log(transformDate(Date.now().toString()))
   useEffect(() => {
     const newTrackedDates = habit.trackedDays.reduce((acc: TransformedTrackedDatesType, date: string) => {
       const formattedDate = transformDate(date)
@@ -53,6 +54,7 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
         monthTextColor: '#ffffff',
         textSectionTitleColor: '#ffffff',
         arrowColor: '#ffffff',
+        textDisabledColor: '#333b58'
       }}
       onDayPress={
         async (day: CalendarDayType) => {
@@ -71,6 +73,7 @@ export function Calendar({habit, searchHabit}: {habit: HabitProps, searchHabit: 
         }
       }
       markedDates={transformedTrackedDates}
+      maxDate={transformDate(Date.now().toString())}
     />
   );
 }
