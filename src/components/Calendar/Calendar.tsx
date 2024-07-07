@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet } from 'react-native'
-import {Calendar as CalendarRN} from 'react-native-calendars';
+import React, { useEffect, useState } from 'react'
+import { Calendar as CalendarRN } from 'react-native-calendars';
 import { useSelectDay } from '../../hooks/useSelectDay';
 import { HabitProps } from '../../controllers/useHabit';
 
