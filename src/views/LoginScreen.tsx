@@ -2,15 +2,19 @@ import { SafeAreaView, StyleSheet, View } from "react-native"
 import { TextInput } from "../components/TextInput/TextInput"
 import { Button } from "../components/Button/Button"
 import Icon from 'react-native-vector-icons/Ionicons'
+import { Header } from "../components/Header/Header"
 
 export function LoginScreen() {
   
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput onChange={() => {}} placeholder='Digite seu login'/>
-      <TextInput onChange={() => {}} placeholder='Digite sua senha'/>
-      <View style={{marginTop: 20}}>
-        <Button text='ENTRAR' background='#6676ce'height={50}/>
+      <Header title="HABIT KEEPER" isLoginScreen />
+      <View>
+        <TextInput onChange={() => {}} placeholder='Digite seu login'/>
+        <TextInput onChange={() => {}} placeholder='Digite sua senha'/>
+        <View style={{marginTop: 20}}>
+          <Button text='ENTRAR' background='#6676ce'height={50}/>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -21,6 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#161927',
     flex: 1,
     padding: 30,
-    justifyContent: 'center'
+    justifyContent: 'space-evenly'
   }
 })
