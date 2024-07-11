@@ -1,20 +1,25 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { StyleSheet, TextInput as TextInputRN } from "react-native"
 
 type TextInputProps = {
-  onChange: () => void,
-  content: string
+  onChange?: () => void,
+  content?: string
+  placeholder?: string
 }
 
-export function TextInput({onChange, content}: TextInputProps){
+export function TextInput({onChange, content = '', placeholder}: TextInputProps){
 
-  const [value, setValue] = useState()
+  const [value, setValue] = useState(content)
+
+  useEffect(() => {
+    if (onChange) onChange()
+  },[value])
 
   return(
     <TextInputRN
       style={styles.input}
-      onChangeText={onChange}
-      placeholder='Qual hábito você deseja criar?'
+      onChangeText={setValue}
+      placeholder={placeholder}
       placeholderTextColor='#dad9d9'
       selectionColor='#222638'
       maxLength={30}
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
       paddingStart: 10,
       backgroundColor: '#444c6e',
       fontSize: 15,
-      marginTop: 7,
+      marginTop: 10,
       color: '#dad9d9'
   }
 })
