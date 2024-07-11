@@ -68,7 +68,7 @@ export function HabitListScreen({navigation}: HabitListScreenProps){
   return (
     <GestureHandlerRootView>
     <SafeAreaView style={styles.container}>
-      <Header title='HÁBITOS' isDetailScreen={false} onPress={() => toggleBottomSheet()}/>
+      <Header title='HÁBITOS' onPress={() => toggleBottomSheet()}/>
       {
         habits.length > 0 &&
         <DatesTitle last4Days={last4Days}/>
