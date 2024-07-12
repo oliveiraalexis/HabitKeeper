@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { StyleSheet, TextInput as TextInputRN } from "react-native"
+import { StyleSheet, TextInputProps, TextInput as TextInputRN } from "react-native"
 
-type TextInputProps = {
-  onChange?: () => void,
-  content?: string
-  placeholder?: string
-}
+export function TextInput(props: TextInputProps){
 
-export function TextInput({onChange, content = '', placeholder}: TextInputProps){
-
-  const [value, setValue] = useState(content)
-
-  useEffect(() => {
-    if (onChange) onChange()
-  },[value])
+  const [value, setValue] = useState(props.value)
 
   return(
     <TextInputRN
+      secureTextEntry={props.secureTextEntry}
       style={styles.input}
       onChangeText={setValue}
-      placeholder={placeholder}
+      placeholder={props.placeholder}
       placeholderTextColor='#dad9d9'
       selectionColor='#222638'
       maxLength={30}
