@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { StyleSheet, TextInputProps, TextInput as TextInputRN } from "react-native"
 
 export function TextInput(props: TextInputProps){
