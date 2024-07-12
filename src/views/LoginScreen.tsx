@@ -10,8 +10,8 @@ export function LoginScreen() {
     <SafeAreaView style={styles.container}>
       <Header title="HABIT KEEPER" isLoginScreen />
       <View>
-        <TextInput onChange={() => {}} placeholder='Digite seu login'/>
-        <TextInput onChange={() => {}} placeholder='Digite sua senha'/>
+        <TextInput placeholder='Digite seu login'/>
+        <TextInput placeholder='Digite sua senha' secureTextEntry/>
         <View style={{marginTop: 20}}>
           <Button text='ENTRAR' background='#6676ce'height={50}/>
         </View>
