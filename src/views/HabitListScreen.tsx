@@ -16,10 +16,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 type HabitListScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitListScreen'>;
 
-export function HabitListScreen({navigation}: HabitListScreenProps){
+export function HabitListScreen({route, navigation}: HabitListScreenProps){
 
   const last4Days = useLast4Days()
-  const {userId, getHabits, deleteHabit} = useHabit()
+  const { userId } = route.params
+  const { getHabits, deleteHabit} = useHabit()
   const bottomSheetRef = useRef<BottomSheet>(null)
   
   const [habits, setHabits] = useState([])
