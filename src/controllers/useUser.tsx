@@ -33,6 +33,20 @@ export function useUser() {
     }
   }
 
+  async function loginUser(username: string, password: string) {
+    try {
+      const data = {
+        username,
+        password
+      }
+      const response = await axiosBase.post(`/login`, data)
+      return response.data
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível buscar o usuário. Verifique sua conexão ou tente novamente mais tarde.')
+      return {}
+    }
+  }
+
   async function createUser(user: UserProps) {
     try {
       const response = await axiosBase.post(`/users`, user)
@@ -53,5 +67,5 @@ export function useUser() {
     }
   }
 
-  return {getUsers, getUser, createUser, deleteUser}
+  return {getUsers, getUser, createUser, deleteUser, loginUser}
 }
