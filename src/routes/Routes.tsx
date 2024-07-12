@@ -3,8 +3,10 @@ import { NavigationContainer } from "@react-navigation/native"
 import { HabitListScreen } from "../views/HabitListScreen"
 import { HabitDetailScreen } from "../views/HabitDetailScreen"
 import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack'
+import { LoginScreen } from "../views/LoginScreen"
 
 export type RootStackParamList = {
+  LoginScreen: undefined,
   HabitListScreen: undefined,
   HabitDetailScreen: {
     habitId: string
@@ -18,7 +20,8 @@ export function Routes() {
   
   return (
     <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='HabitListScreen'>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='LoginScreen'>
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="HabitListScreen" component={HabitListScreen} />
           <Stack.Screen name="HabitDetailScreen" component={HabitDetailScreen} />
         </Stack.Navigator>
