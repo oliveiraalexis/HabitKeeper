@@ -7,7 +7,9 @@ import { LoginScreen } from "../views/LoginScreen"
 
 export type RootStackParamList = {
   LoginScreen: undefined,
-  HabitListScreen: undefined,
+  HabitListScreen: {
+    userId: string
+  },
   HabitDetailScreen: {
     habitId: string
   }
