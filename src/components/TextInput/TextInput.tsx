@@ -1,9 +1,17 @@
-import React, { useState } from "react"
-import { StyleSheet, TextInputProps, TextInput as TextInputRN } from "react-native"
+import React, { useEffect, useState } from "react"
+import { StyleSheet, TextInputProps as RNTextInputProps, TextInput as TextInputRN } from "react-native"
+
+type TextInputProps = RNTextInputProps & {
+  func?: (v: string) => void
+}
 
 export function TextInput(props: TextInputProps){
 
-  const [value, setValue] = useState(props.value)
+  const [value, setValue] = useState((props && props.value) ? props.value : '')
+
+  useEffect(() => {
+    if (props.func) props.func(value)
+  },[value])
 
   return(
     <TextInputRN
