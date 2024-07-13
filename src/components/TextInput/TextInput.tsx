@@ -6,24 +6,14 @@ type TextInputProps = RNTextInputProps & {
 }
 
 export function TextInput(props: TextInputProps){
-
-  const [value, setValue] = useState((props && props.value) ? props.value : '')
-
-  useEffect(() => {
-    if (props.func) props.func(value)
-  },[value])
-
+  
   return(
     <TextInputRN
-      secureTextEntry={props.secureTextEntry}
+      {...props}
       style={styles.input}
-      onChangeText={setValue}
-      placeholder={props.placeholder}
       placeholderTextColor='#dad9d9'
       selectionColor='#222638'
       maxLength={30}
-      value={value}
-      defaultValue={value}
     />
   )
 }
