@@ -11,6 +11,7 @@ export type RootStackParamList = {
     userId: string
   },
   HabitDetailScreen: {
+    userId: string,
     habitId: string
   }
 }

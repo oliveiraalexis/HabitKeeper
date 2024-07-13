@@ -10,7 +10,7 @@ type HabitDetailScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitD
 
 export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
 
-  const habitId = route.params.habitId
+  const {userId, habitId} = route.params
   const [habit, setHabit] = useState<HabitProps>({
     _id: '',
     name: '',
@@ -19,7 +19,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
     createdAt: '',
     __v: 0
   })
-  const {userId, getHabit} = useHabit()
+  const {getHabit} = useHabit()
 
   useEffect(() => {
     searchHabit()

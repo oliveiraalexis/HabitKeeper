@@ -79,7 +79,7 @@ export function HabitListScreen({route, navigation}: HabitListScreenProps){
           <SwipeListView
           data={habits}
           renderItem={({item, index}) => (
-            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate('HabitDetailScreen',  {habitId: item['_id']})}/>
+            <CondensedHabit habit={item} key={index} last4Days={last4Days} onPress={() => navigation.navigate('HabitDetailScreen',  {userId: userId, habitId: item['_id']})}/>
           )}
           renderHiddenItem={ (data, rowMap) => (
             <View style={styles.swipe}>
@@ -126,7 +126,7 @@ export function HabitListScreen({route, navigation}: HabitListScreenProps){
         >
           <BottomSheetScrollView>
             <View style={styles.contentContainer}>
-              <HabitForm habitToBeEdited={habitToBeEdited} toggleBottomSheet={toggleBottomSheet} getHabits={searchHabits}/>
+              <HabitForm userId={userId} habitToBeEdited={habitToBeEdited} toggleBottomSheet={toggleBottomSheet} getHabits={searchHabits}/>
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
