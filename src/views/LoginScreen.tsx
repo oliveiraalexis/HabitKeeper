@@ -51,7 +51,7 @@ export function LoginScreen({navigation}: LoginScreenProps) {
         )}
         name="password"
       />
-        { (errors?.username?.type == 'required' || errors?.password?.type == 'required') && <Text style={styles.text}>Todos os campos são obrigatór                           ios</Text>}
+        { (errors?.username?.type == 'required' || errors?.password?.type == 'required') && <Text style={styles.text}>Todos os campos são obrigatórios</Text>}
         <View style={{marginTop: 20}}>
           <Button text='ENTRAR' background='#6676ce'height={50} onPress={handleSubmit(login)}/>
         </View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   text: {
-    color: 'red',
+    color: '#990000',
     fontSize: 10,
     marginTop: 5
   }

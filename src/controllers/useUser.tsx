@@ -42,7 +42,9 @@ export function useUser() {
       const response = await axiosBase.post(`/login`, data)
       return response.data
     } catch(error: any){
-      Alert.alert('Atenção', 'Não foi possível buscar o usuário. Verifique sua conexão ou tente novamente mais tarde.')
+      if (error?.response?.status == 500) Alert.alert('Atenção', 'Não foi possível buscar o usuário. Verifique sua conexão ou tente novamente mais tarde.')
+      if (error?.response?.status == 401) Alert.alert('Atenção', 'Senha incorreta.')
+      if (error?.response?.status == 404) Alert.alert('Atenção', 'O usuário informado não existe.')
       return {}
     }
   }
