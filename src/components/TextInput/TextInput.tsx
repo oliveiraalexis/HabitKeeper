@@ -11,7 +11,7 @@ export function TextInput(props: TextInputProps){
     <TextInputRN
       {...props}
       style={styles.input}
-      placeholderTextColor='#dad9d9'
+      placeholderTextColor='#969696a4'
       selectionColor='#222638'
       maxLength={30}
     />
