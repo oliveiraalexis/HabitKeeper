@@ -11,7 +11,7 @@ export function TextInput(props: TextInputProps){
     <TextInputRN
       {...props}
       style={styles.input}
-      placeholderTextColor='#969696a4'
+      placeholderTextColor='#969696a3'
       selectionColor='#222638'
       maxLength={30}
     />
@@ -20,7 +20,7 @@ export function TextInput(props: TextInputProps){
 
 const styles = StyleSheet.create({
   input: {
-      height: 40,
+      height: 50,
       width: '100%',
       borderRadius: 10,
       paddingVertical: 5,
