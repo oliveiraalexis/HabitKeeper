@@ -12,7 +12,7 @@ type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'
 export function LoginScreen({navigation}: LoginScreenProps) {
 
   const { loginUser } = useUser()
-  const { control, handleSubmit, formState: { errors }} = useForm({
+  const { control, handleSubmit, setError, formState: { errors }} = useForm({
     defaultValues: {
       username: "",
       password: "",
@@ -20,10 +20,15 @@ export function LoginScreen({navigation}: LoginScreenProps) {
   })
 
   async function login(data: { username: string; password: string }){
-    const result = await loginUser(data.username, data.password)
-    console.log(result)
-    if (result && result.username){
-      navigation.navigate('HabitListScreen',  {userId: result._id})
+    const response = await loginUser(data.username, data.password)
+    if (response?.username){
+      navigation.navigate('HabitListScreen',  {userId: response._id})
+    }
+    
+    if (response?.status > 200){
+      setError('root.serverError', { 
+        type: response.status,
+      })
     }
   }
   
@@ -52,6 +57,8 @@ export function LoginScreen({navigation}: LoginScreenProps) {
         name="password"
       />
         { (errors?.username?.type == 'required' || errors?.password?.type == 'required') && <Text style={styles.text}>Todos os campos são obrigatórios</Text>}
+        { errors?.root?.serverError?.type === 401 && <Text style={styles.text}>Senha incorreta.</Text>}
+        { errors?.root?.serverError?.type === 404 && <Text style={styles.text}>O usuário informado não existe.</Text>}
         <View style={{marginTop: 20}}>
           <Button text='ENTRAR' background='#6676ce'height={50} onPress={handleSubmit(login)}/>
         </View>
