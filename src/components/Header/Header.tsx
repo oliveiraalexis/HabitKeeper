@@ -4,12 +4,12 @@ import { Button } from '../Button/Button'
 
 type HeaderProp = {
   title: string, 
-  isDetailScreen?: boolean,
+  hasBackButton?: boolean,
   isLoginScreen?: boolean,
   onPress?: () => void
 }
 
-export function Header({title, isDetailScreen, isLoginScreen, onPress = () => {}}: HeaderProp): React.JSX.Element {
+export function Header({title, hasBackButton, isLoginScreen, onPress = () => {}}: HeaderProp): React.JSX.Element {
   
   return (
     <View>
@@ -19,7 +19,7 @@ export function Header({title, isDetailScreen, isLoginScreen, onPress = () => {}
         </View>
       }
 
-      {!isDetailScreen && !isLoginScreen &&
+      {!hasBackButton && !isLoginScreen &&
         <View style={styles.ListContainer}>
           <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} onPress={() => {}} disabled={true}/>
           <Text style={styles.text}>{title}</Text>
@@ -27,7 +27,7 @@ export function Header({title, isDetailScreen, isLoginScreen, onPress = () => {}
         </View>
       }
       
-      {isDetailScreen && !isLoginScreen &&
+      {hasBackButton && !isLoginScreen &&
         <View style={styles.detailContainer}>
           <Button icon={{name:"chevron-back", color:"#ffffff", size:25}} onPress={onPress}/>
           <View style={styles.detailTitle}>

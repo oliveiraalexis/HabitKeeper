@@ -2,12 +2,9 @@ import { axiosBase } from "../helpers/axiosBase"
 import { Alert } from "react-native"
 
 export type UserProps = {
-  _id: string,
   name: string,
   username: string,
-  password: string,
-  createdAt: string,
-  __v: number
+  password: string
 }
 
 export function useUser() {
@@ -50,10 +47,10 @@ export function useUser() {
   async function createUser(user: UserProps) {
     try {
       const response = await axiosBase.post(`/users`, user)
-      return response.data
+      return response
     } catch(error: any){
-      Alert.alert('Atenção', 'Não foi possível criar o hábito. Verifique sua conexão ou tente novamente mais tarde.')
-      return {}
+      if (error?.response?.status == 500) Alert.alert('Atenção', 'Não foi possível cadastrar o usuário. Verifique sua conexão ou tente novamente mais tarde.')
+      return error?.response
     }
   }
 

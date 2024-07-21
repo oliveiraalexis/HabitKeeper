@@ -36,7 +36,7 @@ export function Button({icon, text, padding = 10, height, width, disabled = fals
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderRadius: 8,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center'
     },

@@ -32,7 +32,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={habit.name} isDetailScreen onPress={() => navigation.goBack()}/>
+      <Header title={habit.name} hasBackButton onPress={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
         <Calendar habit={habit} searchHabit={searchHabit}/>
         <Text style={styles.text}>Total de dias cumpridos: {habit.trackedDays.length}</Text>

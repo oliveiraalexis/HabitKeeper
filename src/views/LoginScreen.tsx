@@ -62,6 +62,9 @@ export function LoginScreen({navigation}: LoginScreenProps) {
         <View style={{marginTop: 20}}>
           <Button text='ENTRAR' background='#6676ce'height={50} onPress={handleSubmit(login)}/>
         </View>
+        <View style={{marginTop: 10}}>
+          <Button text='CADASTRAR' background='#313855'height={50} onPress={() => navigation.navigate('RegistrationScreen')}/>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#990000',
-    fontSize: 10,
+    fontSize: 11,
     marginTop: 5
   }
 })
