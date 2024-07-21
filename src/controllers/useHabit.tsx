@@ -12,9 +12,6 @@ export type HabitProps = {
 
 export function useHabit() {
 
-  const userId = '6649476dac7f48df621de7af'
-
-
   async function getHabits(userId: string) {
 
     try {
@@ -71,5 +68,5 @@ export function useHabit() {
     }
   }
 
-  return {userId, getHabits, getHabit, createHabit, deleteHabit, updateHabit}
+  return {getHabits, getHabit, createHabit, deleteHabit, updateHabit}
 }

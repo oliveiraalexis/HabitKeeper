@@ -10,7 +10,7 @@ type HabitDetailScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitD
 
 export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
 
-  const habitId = route.params.habitId
+  const {userId, habitId} = route.params
   const [habit, setHabit] = useState<HabitProps>({
     _id: '',
     name: '',
@@ -19,7 +19,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
     createdAt: '',
     __v: 0
   })
-  const {userId, getHabit} = useHabit()
+  const {getHabit} = useHabit()
 
   useEffect(() => {
     searchHabit()
@@ -32,7 +32,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={habit.name} isDetailScreen={true} onPress={() => navigation.goBack()}/>
+      <Header title={habit.name} isDetailScreen onPress={() => navigation.goBack()}/>
       <View style={styles.contentContainer}>
         <Calendar habit={habit} searchHabit={searchHabit}/>
         <Text style={styles.text}>Total de dias cumpridos: {habit.trackedDays.length}</Text>

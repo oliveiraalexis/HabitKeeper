@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { Dimensions } from 'react-native'
 
 type buttonProps = TouchableOpacityProps & {
     icon?: {
@@ -12,19 +13,21 @@ type buttonProps = TouchableOpacityProps & {
     padding?: number,
     height?: number,
     width?: number,
+    background?: string
     onPress?: () => void
 }
 
-export function Button({icon, text, padding = 10, height, width, disabled = false, onPress}: buttonProps){
+export function Button({icon, text, padding = 10, height, width, disabled = false, background, onPress}: buttonProps){
 
     const buttonHeight = (height) ? {height: height} : {}
-    const buttonWidth = (width) ? {width: width} : {}
+    const buttonWidth = (text == 'ENTRAR') ? {width: Dimensions.get('window').width - 60} : {width: width}
     const buttonOpacity = disabled ? 0.3 : 1
+    const buttonMarginLeft = (icon && text) ? 5 : 0
 
     return (
-        <TouchableOpacity disabled={disabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity}} onPress={onPress}>
+        <TouchableOpacity disabled={disabled} style={{...styles.container, ...buttonWidth, ...buttonHeight, padding: padding, opacity: buttonOpacity, backgroundColor: background}} onPress={onPress}>
             {icon && <Icon name={icon.name} color={icon.color} size={icon.size}/>}
-            {text && <Text style={styles.text}>{text}</Text>}
+            {text && <Text style={{...styles.text, marginLeft: buttonMarginLeft}}>{text}</Text>}
         </TouchableOpacity>
     )
 
@@ -33,10 +36,11 @@ export function Button({icon, text, padding = 10, height, width, disabled = fals
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderRadius: 8
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     text: {
-        marginLeft: 5,
         color: '#ffffff',
         fontWeight: 'bold',
         fontSize: 15
