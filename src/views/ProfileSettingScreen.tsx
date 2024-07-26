@@ -67,7 +67,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
   }
 
   async function deleteAccount() {
-    () => Alert.alert('Atenção', 'Deseja realmente excluir esta conta?', 
+    Alert.alert('Atenção', 'Deseja realmente excluir esta conta?', 
       [
         {
           text: 'Cancelar',
