@@ -6,10 +6,11 @@ type HeaderProp = {
   title: string, 
   hasBackButton?: boolean,
   isLoginScreen?: boolean,
-  onPress?: () => void
+  onPress?: () => void,
+  goToSettings?: () => void
 }
 
-export function Header({title, hasBackButton, isLoginScreen, onPress = () => {}}: HeaderProp): React.JSX.Element {
+export function Header({title, hasBackButton, isLoginScreen, onPress = () => {}, goToSettings = () => {}}: HeaderProp): React.JSX.Element {
   
   return (
     <View>
@@ -21,7 +22,7 @@ export function Header({title, hasBackButton, isLoginScreen, onPress = () => {}}
 
       {!hasBackButton && !isLoginScreen &&
         <View style={styles.ListContainer}>
-          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} onPress={() => {}} disabled={true}/>
+          <Button icon={{name:"settings-sharp", color:"#ffffff", size:20}} onPress={goToSettings}/>
           <Text style={styles.text}>{title}</Text>
           <Button icon={{name:"add", color:"#ffffff", size:25}} onPress={onPress}/>
         </View>

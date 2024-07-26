@@ -64,5 +64,16 @@ export function useUser() {
     }
   }
 
-  return {getUsers, getUser, createUser, deleteUser, loginUser}
+  async function updateUser(userId: string, newUser: UserProps) {
+    try {
+      const response = await axiosBase.put(`/user/${userId}`, newUser)
+      return response
+    } catch(error: any){
+      Alert.alert('Atenção', 'Não foi possível atualizar seus dados. Verifique sua conexão ou tente novamente mais tarde.')
+      console.log(error)
+      return error
+    }
+  }
+
+  return {getUsers, getUser, createUser, deleteUser, loginUser, updateUser}
 }

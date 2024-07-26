@@ -69,7 +69,7 @@ export function HabitListScreen({route, navigation}: HabitListScreenProps){
   return (
     <GestureHandlerRootView>
     <SafeAreaView style={styles.container}>
-      <Header title='HÁBITOS' onPress={() => toggleBottomSheet()}/>
+      <Header title='HÁBITOS' onPress={() => toggleBottomSheet()}  goToSettings={() => navigation.navigate('ProfileSettingScreen', {userId: userId})}/>
       {
         habits.length > 0 &&
         <DatesTitle last4Days={last4Days}/>

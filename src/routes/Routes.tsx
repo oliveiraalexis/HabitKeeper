@@ -5,6 +5,7 @@ import { HabitDetailScreen } from "../views/HabitDetailScreen"
 import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack'
 import { LoginScreen } from "../views/LoginScreen"
 import { RegistrationScreen } from "../views/RegistrationScreen"
+import { ProfileSettingScreen } from "../views/ProfileSettingScreen"
 
 export type RootStackParamList = {
   LoginScreen: undefined,
@@ -16,6 +17,9 @@ export type RootStackParamList = {
     userId: string,
     habitId: string
   },
+  ProfileSettingScreen: {
+    userId: string
+  }
 }
 export type StackTypes = NativeStackNavigationProp<RootStackParamList>
 
@@ -30,6 +34,7 @@ export function Routes() {
           <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
           <Stack.Screen name="HabitListScreen" component={HabitListScreen} />
           <Stack.Screen name="HabitDetailScreen" component={HabitDetailScreen} />
+          <Stack.Screen name="ProfileSettingScreen" component={ProfileSettingScreen} />
         </Stack.Navigator>
     </NavigationContainer>
   )
