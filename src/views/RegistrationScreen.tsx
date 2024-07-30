@@ -25,7 +25,6 @@ export function RegistrationScreen({navigation}: RegistrationScreenProps) {
 
   async function register (data: {name: string, email: string, password: string, passwordConfirmation: string}) {
     const response = await createUser({name: data.name, username: data.email, password: data.password})
-    console.log(response)
     if(response?.status == 201){
       Alert.alert('Cadastro realizado!', 'Você será redirecionado para a tela de login.', 
         [

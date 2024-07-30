@@ -6,12 +6,14 @@ import { useUser } from "../controllers/useUser"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../routes/Routes"
 import { useForm, Controller } from "react-hook-form"
+import { search, storageKey, StoredToken} from "../services/Storage"
+import { useEffect } from "react"
 
-type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
+type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>
 
 export function LoginScreen({navigation}: LoginScreenProps) {
 
-  const { loginUser } = useUser()
+  const { loginUser, isTokenExpired } = useUser()
   const { control, handleSubmit, setError, formState: { errors }} = useForm({
     defaultValues: {
       username: "",
@@ -19,10 +21,18 @@ export function LoginScreen({navigation}: LoginScreenProps) {
     },
   })
 
+  useEffect(() => {
+    if (!isTokenExpired()){
+      const token: StoredToken | null = search(storageKey) as StoredToken | null
+      if (token?.userId) navigation.navigate('HabitListScreen',  {userId: token?.userId})
+    }
+  },[])
+
+
   async function login(data: { username: string; password: string }){
     const response = await loginUser(data.username, data.password)
-    if (response?.username){
-      navigation.navigate('HabitListScreen',  {userId: response._id})
+    if (response?.user?.username){
+      navigation.navigate('HabitListScreen',  {userId: response.user._id})
     }
     
     if (response?.status > 200){
