@@ -3,9 +3,9 @@ import { View, TextInput as TextInputRN, Text, StyleSheet } from 'react-native'
 import { Button } from '../Button/Button'
 import { useHabit, HabitProps } from '../../controllers/useHabit'
 
-export function HabitForm ({habitToBeEdited, toggleBottomSheet, getHabits}: {habitToBeEdited: string, toggleBottomSheet: () => void, getHabits: () => void}){
+export function HabitForm ({userId, habitToBeEdited, toggleBottomSheet, getHabits}: {userId: string, habitToBeEdited: string, toggleBottomSheet: () => void, getHabits: () => void}){
 
-    const {userId, createHabit, getHabit, updateHabit} = useHabit()
+    const {createHabit, getHabit, updateHabit} = useHabit()
     const [habit, setHabit] = useState<HabitProps>({
         _id: '',
         name: '',
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     input: {
-        height: 40,
+        height: 50,
         width: '100%',
         borderRadius: 10,
         paddingVertical: 5,
