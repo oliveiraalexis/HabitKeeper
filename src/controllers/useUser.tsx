@@ -1,7 +1,7 @@
 import { axiosBase } from "../helpers/axiosBase"
 import { Alert } from "react-native"
 import { search, save, remove, storageKey} from "../services/Storage"
-import { jwtDecode, JwtPayload } from "jwt-decode"
+import { jwtDecode } from "jwt-decode"
 
 export type UserProps = {
   name: string,
@@ -47,6 +47,10 @@ export function useUser() {
       if (error?.response?.status == 500) Alert.alert('Atenção', 'Não foi possível buscar o usuário. Verifique sua conexão ou tente novamente mais tarde.')
       return error?.response
     }
+  }
+
+  async function logout(){
+
   }
 
   function isTokenExpired() {

@@ -7,6 +7,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../routes/Routes"
 import { useForm, Controller } from "react-hook-form"
 import { useEffect, useState } from "react"
+import { remove, storageKey} from "../services/Storage"
 
 type ProfileSettingScreenProps = NativeStackScreenProps<RootStackParamList, 'ProfileSettingScreen'>;
 
@@ -86,6 +87,25 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
       ]
     )
   }
+
+  async function logout() {
+    Alert.alert('Atenção', 'Deseja sair da conta? Você será redirecionado para a tela de login e precisará logar novamente.', 
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            remove(storageKey)
+            navigation.navigate('LoginScreen')
+          }
+        },
+      ]
+    )
+  }
   
   return (
     <SafeAreaView style={styles.container}>
@@ -121,6 +141,9 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
           { errors?.newPassword?.type == 'validate' && <Text style={styles.text}>A confirmação da senha está diferente da nova senha</Text>}
         <View style={{marginTop: 20}}>
           <Button text='SALVAR' background='#6676ce'height={50} onPress={handleSubmit(profileUpdate)}/>
+        </View>
+        <View style={{marginTop: 10}}>
+          <Button text='SAIR DA CONTA' background='#6676ce'height={50} onPress={logout}/>
         </View>
         <View style={{marginTop: 10}}>
           <Button text='EXCLUIR CONTA' background='#c73f3f'height={50} onPress={deleteAccount}/>
