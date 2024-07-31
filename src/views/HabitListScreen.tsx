@@ -6,9 +6,9 @@ import { CondensedHabit } from '../components/CondensedHabit/CondensedHabit'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 import { HabitForm } from '../components/HabitForm/HabitForm'
-import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../routes/Routes'
 import { useHabit } from '../controllers/useHabit'
+import { useUser } from '../controllers/useUser'
 import { useLast4Days } from '../hooks/useLast4Days'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { Button } from '../components/Button/Button'
@@ -21,6 +21,7 @@ export function HabitListScreen({route, navigation}: HabitListScreenProps){
   const last4Days = useLast4Days()
   const { userId } = route.params
   const { getHabits, deleteHabit} = useHabit()
+  const { isTokenExpired, logoutUser } = useUser()
   const bottomSheetRef = useRef<BottomSheet>(null)
   
   const [habits, setHabits] = useState([])
@@ -54,6 +55,7 @@ export function HabitListScreen({route, navigation}: HabitListScreenProps){
   }
 
   useEffect(() => {
+    if (isTokenExpired()) logoutUser(navigation)
     searchHabits()
   },[])
 

@@ -13,7 +13,7 @@ type ProfileSettingScreenProps = NativeStackScreenProps<RootStackParamList, 'Pro
 
 export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenProps) {
 
-  const { getUser, updateUser, deleteUser, logoutUser } = useUser()
+  const { getUser, updateUser, deleteUser, logoutUser, isTokenExpired } = useUser()
   const {userId} = route.params
   const [user, setUser] = useState<UserProps>({
     name: '',
@@ -31,6 +31,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
   const password = watch('password')
 
   useEffect(() => {
+    if (isTokenExpired()) logoutUser(navigation)
     searchUser()
   },[])
 

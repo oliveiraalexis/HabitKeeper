@@ -5,11 +5,13 @@ import { Header } from '../components/Header/Header'
 import { RootStackParamList } from '../routes/Routes'
 import { HabitProps, useHabit } from '../controllers/useHabit'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useUser } from '../controllers/useUser'
 
 type HabitDetailScreenProps = NativeStackScreenProps<RootStackParamList, 'HabitDetailScreen'>;
 
 export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
 
+  const { isTokenExpired, logoutUser } = useUser()
   const {userId, habitId} = route.params
   const [habit, setHabit] = useState<HabitProps>({
     _id: '',
@@ -22,6 +24,7 @@ export function HabitDetailScreen({route, navigation}: HabitDetailScreenProps){
   const {getHabit} = useHabit()
 
   useEffect(() => {
+    if (isTokenExpired()) logoutUser(navigation)
     searchHabit()
   },[])
 
