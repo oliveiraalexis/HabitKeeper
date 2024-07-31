@@ -80,7 +80,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
           onPress: async () => {
             const response = await deleteUser(userId)
             if(response == 200){
-              navigation.navigate('LoginScreen')
+              navigation.replace('LoginScreen')
             }
           },
         },
@@ -100,7 +100,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
           text: 'OK',
           onPress: async () => {
             remove(storageKey)
-            navigation.navigate('LoginScreen')
+            navigation.replace('LoginScreen')
           }
         },
       ]
