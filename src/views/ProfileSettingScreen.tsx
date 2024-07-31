@@ -13,7 +13,7 @@ type ProfileSettingScreenProps = NativeStackScreenProps<RootStackParamList, 'Pro
 
 export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenProps) {
 
-  const { getUser, updateUser, deleteUser, loginUser } = useUser()
+  const { getUser, updateUser, deleteUser, logoutUser } = useUser()
   const {userId} = route.params
   const [user, setUser] = useState<UserProps>({
     name: '',
@@ -80,7 +80,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
           onPress: async () => {
             const response = await deleteUser(userId)
             if(response == 200){
-              navigation.replace('LoginScreen')
+              logoutUser(navigation)
             }
           },
         },
@@ -99,8 +99,7 @@ export function ProfileSettingScreen({route, navigation}: ProfileSettingScreenPr
         {
           text: 'OK',
           onPress: async () => {
-            remove(storageKey)
-            navigation.replace('LoginScreen')
+            logoutUser(navigation)
           }
         },
       ]

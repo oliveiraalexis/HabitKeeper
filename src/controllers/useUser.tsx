@@ -49,8 +49,9 @@ export function useUser() {
     }
   }
 
-  async function logout(){
-
+  async function logoutUser(navigation: any){
+    remove(storageKey)
+    navigation.replace('LoginScreen')
   }
 
   function isTokenExpired() {
@@ -98,5 +99,5 @@ export function useUser() {
     }
   }
 
-  return {getUsers, getUser, createUser, deleteUser, loginUser, updateUser, isTokenExpired}
+  return {getUsers, getUser, createUser, deleteUser, loginUser, updateUser, isTokenExpired, logoutUser}
 }
