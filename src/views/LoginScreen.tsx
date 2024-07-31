@@ -5,32 +5,29 @@ import { Header } from "../components/Header/Header"
 import { useUser } from "../controllers/useUser"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { RootStackParamList } from "../routes/Routes"
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { search, storageKey, StoredToken} from "../services/Storage"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>
 
 export function LoginScreen({navigation}: LoginScreenProps) {
 
+  
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const { loginUser, isTokenExpired } = useUser()
-  const { control, handleSubmit, setError, formState: { errors }} = useForm({
-    defaultValues: {
-      username: "",
-      password: "",
-    },
-  })
-
+  const { handleSubmit, setError, formState: { errors }} = useForm()
+  
   useEffect(() => {
-    if (!isTokenExpired()){
+    if(!isTokenExpired()){
       const token: StoredToken | null = search(storageKey) as StoredToken | null
       if (token?.userId) navigation.navigate('HabitListScreen',  {userId: token?.userId})
     }
   },[])
 
-
-  async function login(data: { username: string; password: string }){
-    const response = await loginUser(data.username, data.password)
+  async function login(){
+    const response = await loginUser(username, password)
     if (response?.user?.username){
       navigation.navigate('HabitListScreen',  {userId: response.user._id})
     }
@@ -46,34 +43,15 @@ export function LoginScreen({navigation}: LoginScreenProps) {
     <SafeAreaView style={styles.container}>
       <Header title="HABIT KEEPER" isLoginScreen />
       <View>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange } }) => (
-          <TextInput placeholder='Digite seu login' onChangeText={onChange} />
-        )}
-        name="username"
-      />
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange } }) => (
-          <TextInput placeholder='Digite sua senha' onChangeText={onChange} secureTextEntry />
-        )}
-        name="password"
-      />
-        { (errors?.username?.type == 'required' || errors?.password?.type == 'required') && <Text style={styles.text}>Todos os campos são obrigatórios</Text>}
+        <TextInput placeholder='Digite seu login' onChangeText={setUsername} />
+        <TextInput placeholder='Digite sua senha' onChangeText={setPassword} secureTextEntry />
         { errors?.root?.serverError?.type === 401 && <Text style={styles.text}>Senha incorreta.</Text>}
         { errors?.root?.serverError?.type === 404 && <Text style={styles.text}>O usuário informado não existe.</Text>}
         <View style={{marginTop: 20}}>
-          <Button text='ENTRAR' background='#6676ce'height={50} onPress={handleSubmit(login)}/>
+          <Button text='ENTRAR' background='#6676ce'height={50} onPress={handleSubmit(login)} disabled={username && password ? false : true} />
         </View>
         <View style={{marginTop: 10}}>
-          <Button text='CADASTRAR' background='#313855'height={50} onPress={() => navigation.navigate('RegistrationScreen')}/>
+          <Button text='CADASTRAR' background='#313855'height={50} onPress={() => navigation.navigate('RegistrationScreen')} />
         </View>
       </View>
     </SafeAreaView>
