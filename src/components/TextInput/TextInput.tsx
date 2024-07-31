@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { StyleSheet, TextInputProps as RNTextInputProps, TextInput as TextInputRN } from "react-native"
 
-type TextInputProps = RNTextInputProps & {
-  func?: (v: string) => void
-}
+type TextInputProps = RNTextInputProps
 
 export function TextInput(props: TextInputProps){
   
